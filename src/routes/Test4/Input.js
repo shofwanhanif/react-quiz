@@ -1,9 +1,11 @@
 
-const Input = () => {
+const Input = (props) => {
+  const { inputRef, onSubmit } = props
+
   return (
-    <form>
-      <input type="text" placeholder="search" />
-      <button type="submit">🔍</button>
+    <form onSubmit={onSubmit}>
+      <input type="text" placeholder="search" ref={inputRef} />
+      <button type="submit" onClick={onSubmit}>🔍</button>
     </form>
   )
 }
