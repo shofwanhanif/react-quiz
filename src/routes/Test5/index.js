@@ -1,5 +1,6 @@
 
 import { cssWrapper } from './style';
+import { useState, createContext, useContext } from 'react';
 
 import Comp1 from "./Comp1";
 import Comp3 from "./Comp3";
@@ -25,21 +26,40 @@ const question = (
   </ul>
 );
 
+const ValueContext = createContext()
+
+export const useValue = () => {
+  const context = useContext(ValueContext)
+  if (context === undefined) {
+    throw new Error('useValue must be used within a ValueProvider');
+  }
+  return context;
+}
+
 const Test5 = () => {
+  const [value, setValue] = useState(0)
+
+  const handleChangeValue = (data) => {
+    const regex = /^[0-9\b]+$/;
+
+    if (data === '' || regex.test(data))
+      setValue(data)
+  }
+
   return(
-    <div>
+    <ValueContext.Provider value={{ value, handleChangeValue }}>
       {question}
-      <button id="numbermin" type="button">-</button>
-      <input id="mynumber" type="text" placeholder="input mynumber"/>
-      <button id="numberplus" type="button">+</button>
+      <button id="numbermin" type="button" onClick={() => setValue(value - 1)}>-</button>
+      <input id="mynumber" type="text" placeholder="input mynumber" value={value} onChange={(e) => handleChangeValue(e.target.value)} />
+      <button id="numberplus" type="button" onClick={() => setValue(value + 1)}>+</button>
       <br/>
       <br/>
       <div className={cssWrapper}>
-        The inputted value is [ODD / EVEN]*
+        The inputted value is {value %2 !== 0 ? 'ODD' : 'EVEN'}
       </div>
-      <Comp1 />
-      <Comp3 />
-    </div>
+      <Comp1 value={value} setValue={(data) => handleChangeValue(data)} />
+      <Comp3 value={value} />
+    </ValueContext.Provider>
   )
 }
 

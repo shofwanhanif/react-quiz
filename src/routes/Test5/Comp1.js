@@ -3,8 +3,9 @@ import { cssWrapper } from './style';
 import { useState } from "react";
 import Comp2 from "./Comp2";
 
-const Comp1 = () => {
-  const [value] = useState(0);
+const Comp1 = (props) => {
+  const { value, setValue } = props
+  const [overwrite, setOverwrite] = useState(false);
 
   return(
     <div className={cssWrapper}>
@@ -12,11 +13,10 @@ const Comp1 = () => {
       <br/>
       <br/>
       <label htmlFor="overwrite">
-        Local overwrite: <input id="overwrite" type="checkbox" value={value}/>
-        {/* only show when overwrite is checked */}
-        <input id="mynumber1" type="text" placeholder="input mynumber1"/>
+        Local overwrite: <input id="overwrite" type="checkbox" value={overwrite} onChange={() => setOverwrite(!overwrite)}/>
+        { overwrite  && <input id="mynumber1" type="text" placeholder="input mynumber1" value={value} onChange={(e) => setValue(e.target.value)}/> }
       </label>
-      <Comp2 />
+      <Comp2 value={value} />
     </div>
   )
 }
