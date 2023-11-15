@@ -1,6 +1,10 @@
 import DATA from "./_data";
+import { useSearch } from "./Context";
 
 const Table = () => {
+  const { keyword } = useSearch()
+  const data = keyword ? DATA.filter((item) => item.name.toLowerCase().includes(keyword.toLowerCase())) : DATA
+ 
   return (
     <table>
       <thead>
@@ -11,7 +15,7 @@ const Table = () => {
         </tr>
       </thead>
       <tbody>
-        {DATA.map((eachrow, idx) => (
+        {data.map((eachrow, idx) => (
           <tr key={idx}>
             <td>{eachrow.name}</td>
             <td>{eachrow.age}</td>
