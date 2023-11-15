@@ -5,7 +5,7 @@ const Input = (props) => {
   return (
     <form onSubmit={onSubmit}>
       <input type="text" placeholder="search" ref={inputRef} />
-      <button type="submit" onClick={onSubmit}>🔍</button>
+      <button type="submit">🔍</button>
     </form>
   )
 }

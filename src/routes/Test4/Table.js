@@ -2,7 +2,7 @@ import DATA from "./_data";
 
 const Table = (props) => {
   const { keyword } = props
-  const data = keyword ? DATA.filter((item) => item.name.toLocaleLowerCase().includes(keyword.toLocaleLowerCase())) : DATA
+  const data = keyword ? DATA.filter((item) => item.name.toLowerCase().includes(keyword.toLowerCase())) : DATA
 
   return (
     <table>
