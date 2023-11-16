@@ -1,9 +1,10 @@
 import { cssWrapper } from './style';
 
-const Comp2 = () => {
+const Comp2 = (props) => {
+  const { value } = props
   return(
     <>
-      <div className={cssWrapper}>Latest inputted value is: ______*</div>
+      <div className={cssWrapper}>Latest inputted value is: {value}</div>
     </>
   )
 }

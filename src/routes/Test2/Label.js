@@ -14,15 +14,29 @@ const cssLabel = css({
     padding: 0,
     border: 'none',
     outline: 'none',
+    cursor: 'pointer',
+    visibility: 'hidden'
+  },
+
+  ":hover": {
+    button: {
+      visibility: 'visible'
+    }
   }
 })
 
-const Label = () => {
+const Label = (props) => {
+  const { value, setValue } = props
+  
   return (
+    <>
+    { value && 
     <span className={cssLabel}>
-      RENDER VALUE HERE
-      <button type="button">⊗</button>
-    </span>
+      {value}
+      <button type="button" onClick={() => setValue('')}>⊗</button>
+    </span> 
+    }  
+    </>
   )
 }
 

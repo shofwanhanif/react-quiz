@@ -1,15 +1,17 @@
 import { cssModal } from "./style"
 
-const Modal = () => {
+const Modal = (props) => {
+  const { form, onReset } = props
+
   return (
     <div className={cssModal}>
-      Name: _____
+      Name: {form.name}
       <br/>
-      Age: _____
+      Age: {form.age}
       <br/>
-      Address: _____
+      Address: {form.address}
       <br/>
-      <button>Reset</button>
+      <button onClick={onReset}>Reset</button>
     </div>
   );
 };
